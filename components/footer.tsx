@@ -44,21 +44,21 @@ export default function Footer() {
             <h3 className="text-sm font-medium">Connect</h3>
             <div className="flex space-x-4">
               <Link
-                href="https://github.com/amanesoft"
+                href="https://github.com/brunoidalgo/aivy-chat"
                 className="text-muted-foreground transition-colors hover:text-primary"
               >
                 <Github className="h-5 w-5" />
                 <span className="sr-only">GitHub</span>
               </Link>
               <Link
-                href="https://twitter.com/amanesoft"
+                href="#"
                 className="text-muted-foreground transition-colors hover:text-primary"
               >
                 <Twitter className="h-5 w-5" />
                 <span className="sr-only">Twitter</span>
               </Link>
               <Link
-                href="https://linkedin.com/company/amanesoft"
+                href="#"
                 className="text-muted-foreground transition-colors hover:text-primary"
               >
                 <Linkedin className="h-5 w-5" />
