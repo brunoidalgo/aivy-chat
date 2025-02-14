@@ -41,7 +41,7 @@ export function ChatForm({ className, ...props }: React.ComponentProps<"form">) 
     );
 
     const messageList = (
-        <div className="my-4 flex h-fit min-h-full flex-col gap-4">
+        <div className="my-4 flex max-h-[400px] flex-col gap-4">
             {messages.map((message, index) => {
                 const showHackathonInfo =
                     message.role === "assistant" &&
@@ -52,7 +52,7 @@ export function ChatForm({ className, ...props }: React.ComponentProps<"form">) 
                         {message.content && (
                             <div
                                 data-role={message.role}
-                                className="max-w-[80%] rounded-2xl px-4 py-2.5 text-base data-[role=assistant]:bg-gray-50 data-[role=user]:bg-blue-500 data-[role=assistant]:text-black data-[role=user]:text-white break-words"
+                                className="max-w-[80%] rounded-2xl px-4 py-2.5 text-base data-[role=assistant]:bg-blue-500 data-[role=user]:bg-zinc-800 data-[role=assistant]:text-white data-[role=user]:text-white break-words"
                             >
                                 <ReactMarkdown className={"overflow-wrap"}>
                                     {`${message.content}\n`}
