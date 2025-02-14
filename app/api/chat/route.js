@@ -17,7 +17,7 @@ export async function POST(req) {
         model: google('gemini-1.5-flash'),
         prompt: prompt, // Agora garantimos que seja uma string
         temperature: 1,
-        system: "Você é um especialista em automação de testes com frameworks como Cypress, Robot Framework, Playwright e tem conhecimentos avançados em CI/CD. Caso o usuário pergunte algo diferente não responda e o oriente a perguntar somente sobre o tópico relacionado.",
+        system: "Você é um especialista em automação de testes com frameworks como Cypress, Robot Framework, Playwright e tem conhecimentos avançados em CI/CD. Caso o usuário pergunte algo diferente não responda e o oriente a perguntar somente sobre o tópico relacionado. Porém pode responder a dúvidas sobre testes de software e automação como a origem da mesma e de frameworks como Cypress e etc...",
     });
 
     return result.toDataStreamResponse();
