@@ -48,17 +48,18 @@ export function ChatForm({ className, ...props }: React.ComponentProps<"form">) 
                     message.toolInvocations?.some((t) => t.toolName === "getHackathonInfo" && t.state === "result");
 
                 return (
-                    <div key={index} className={cn("flex flex-col", message.role === "user" ? "items-end" : "items-start")}>
+                    <div key={index} className={cn("flex flex-col w-full", message.role === "user" ? "items-end" : "items-start")}>
                         {message.content && (
                             <div
                                 data-role={message.role}
-                                className="max-w-[80%] rounded-2xl px-4 py-2.5 text-base data-[role=assistant]:bg-gray-50 data-[role=user]:bg-blue-500 data-[role=assistant]:text-black data-[role=user]:text-white break-words" // Add break-words
+                                className="max-w-[80%] rounded-2xl px-4 py-2.5 text-base data-[role=assistant]:bg-gray-50 data-[role=user]:bg-blue-500 data-[role=assistant]:text-black data-[role=user]:text-white break-words"
                             >
-                                <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                                    {message.content}
+                                <ReactMarkdown className={"overflow-wrap"}>
+                                    {`${message.content}\n`}
                                 </ReactMarkdown>
                             </div>
-                        )}
+                        )
+                        }
                         {showHackathonInfo && (
                             <div className="my-4 w-full">
                                 <HackathonInfo attendees={1000} />
@@ -67,7 +68,7 @@ export function ChatForm({ className, ...props }: React.ComponentProps<"form">) 
                     </div>
                 );
             })}
-        </div>
+        </div >
     );
 
     return (
