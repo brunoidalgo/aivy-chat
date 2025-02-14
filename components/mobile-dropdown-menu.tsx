@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button"
 import Link from "next/link"
 
 const navItems = [
-    { name: "Github", href: "/https://github.com/brunoidalgo?tab=repositories" },
+    { name: "Github", href: "https://github.com/brunoidalgo/aivy-chat" },
     { name: "Contato", href: "#" },
     { name: "Demo", href: "/chat" },
     { name: "Contact", href: "/contact" },
