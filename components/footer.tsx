@@ -45,6 +45,7 @@ export default function Footer() {
             <div className="flex space-x-4">
               <Link
                 href="https://github.com/brunoidalgo/aivy-chat"
+                target="_blank" rel="noreferrer"
                 className="text-muted-foreground transition-colors hover:text-primary"
               >
                 <Github className="h-5 w-5" />
@@ -52,13 +53,15 @@ export default function Footer() {
               </Link>
               <Link
                 href="#"
+                target="_blank" rel="noreferrer"
                 className="text-muted-foreground transition-colors hover:text-primary"
               >
                 <Twitter className="h-5 w-5" />
                 <span className="sr-only">Twitter</span>
               </Link>
               <Link
-                href="#"
+                href="https://www.linkedin.com/in/bruno-empke/"
+                target="_blank" rel="noreferrer"
                 className="text-muted-foreground transition-colors hover:text-primary"
               >
                 <Linkedin className="h-5 w-5" />
@@ -70,7 +73,7 @@ export default function Footer() {
       </div>
       <div className="container border-t py-6">
         <p className="text-center text-sm text-muted-foreground">
-          © {new Date().getFullYear()} Aivy Chat, Inc. Todos os direitos reservados.
+          Aivy Chat foi desenvolvido por Bruno Empke em {new Date().getFullYear()}. © Todos os direitos reservados.
         </p>
       </div>
     </footer>
