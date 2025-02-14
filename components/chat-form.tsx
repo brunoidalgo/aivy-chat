@@ -8,24 +8,28 @@ import { Tooltip, TooltipContent, TooltipTrigger, TooltipProvider } from "@/comp
 import { AutoResizeTextarea } from "@/components/autoresize-textarea"
 import { HackathonInfo } from "@/components/hackathoninfo"
 import type React from "react"
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 export function ChatForm({ className, ...props }: React.ComponentProps<"form">) {
     const { messages, input, setInput, append } = useChat({
         api: "/api/chat",
-    })
+    });
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
-        void append({ content: input, role: "user" })
-        setInput("")
-    }
+        e.preventDefault();
+        if (input.trim() !== "") { // Prevent sending empty messages
+            void append({ content: input, role: "user" });
+            setInput("");
+        }
+    };
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
         if (e.key === "Enter" && !e.shiftKey) {
-            e.preventDefault()
-            handleSubmit(e as unknown as React.FormEvent<HTMLFormElement>)
+            e.preventDefault();
+            handleSubmit(e as unknown as React.FormEvent<HTMLFormElement>);
         }
-    }
+    };
 
     const header = (
         <header className="m-auto flex max-w-96 flex-col gap-5 text-center">
@@ -34,23 +38,25 @@ export function ChatForm({ className, ...props }: React.ComponentProps<"form">) 
                 Desenvolvida por Bruno Empke a <span className="text-foreground">Aivy Chat</span> está aqui para lhe ajudar com testes automatizados. Pergunte-me como posso lhe ajudar!
             </p>
         </header>
-    )
+    );
 
     const messageList = (
         <div className="my-4 flex h-fit min-h-full flex-col gap-4">
             {messages.map((message, index) => {
                 const showHackathonInfo =
                     message.role === "assistant" &&
-                    message.toolInvocations?.some((t) => t.toolName === "getHackathonInfo" && t.state === "result")
+                    message.toolInvocations?.some((t) => t.toolName === "getHackathonInfo" && t.state === "result");
 
                 return (
                     <div key={index} className={cn("flex flex-col", message.role === "user" ? "items-end" : "items-start")}>
                         {message.content && (
                             <div
                                 data-role={message.role}
-                                className="max-w-[80%] rounded-2xl px-4 py-2.5 text-base data-[role=assistant]:bg-gray-50 data-[role=user]:bg-blue-500 data-[role=assistant]:text-black data-[role=user]:text-white"
+                                className="max-w-[80%] rounded-2xl px-4 py-2.5 text-base data-[role=assistant]:bg-gray-50 data-[role=user]:bg-blue-500 data-[role=assistant]:text-black data-[role=user]:text-white break-words" // Add break-words
                             >
-                                {message.content}
+                                <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                                    {message.content}
+                                </ReactMarkdown>
                             </div>
                         )}
                         {showHackathonInfo && (
@@ -59,10 +65,10 @@ export function ChatForm({ className, ...props }: React.ComponentProps<"form">) 
                             </div>
                         )}
                     </div>
-                )
+                );
             })}
         </div>
-    )
+    );
 
     return (
         <TooltipProvider>
@@ -85,7 +91,7 @@ export function ChatForm({ className, ...props }: React.ComponentProps<"form">) 
                         onChange={v => setInput(v)}
                         value={input}
                         placeholder="Como posso lhe ajudar hoje ?"
-                        className="placeholder:text-muted-foreground flex-1 bg-transparent focus:outline-none"
+                        className="placeholder:text-muted-foreground flex-1 bg-transparent focus:outline-none resize-none" // Add resize-none
                     />
                     <Tooltip>
                         <TooltipTrigger asChild>
@@ -102,6 +108,5 @@ export function ChatForm({ className, ...props }: React.ComponentProps<"form">) 
                 </form>
             </main>
         </TooltipProvider>
-    )
+    );
 }
-
