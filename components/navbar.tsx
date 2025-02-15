@@ -1,14 +1,28 @@
+"use client"
+
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Github } from "lucide-react"
+import { redirect } from "next/navigation";
+import { getServerSession } from "next-auth"
+import ButtonLogout from "@/components/button-logout"
 
-export default function Navbar() {
+
+export default async function Navbar() {
+
+  const session = await getServerSession();
+
+  if (!session) {
+    redirect('/unauthorization')
+  }
+
   return (
     <header className="ml-4 flex justify-between sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="max-xl:container flex items-center h-14 max-w-screen-2xl">
         <Link href="/chat" className="mr-6 flex items-center space-x-2">
           <span className="font-bold">Aivy Chat</span>
         </Link>
+        <ButtonLogout />
       </div>
       <div className="flex items-center space-x-4 mr-4">
         <Link href="https://github.com/brunoidalgo/aivy-chat" target="_blank" rel="noreferrer">
